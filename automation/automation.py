@@ -43,9 +43,9 @@ x_num=re.sub(r"[(]", "",last_num)
 x_num= x_num.split(" ")
 list_item=[]
 for num in x_num:
-    if len(num) < 11:
-        list_item.append(f"{num[:3]}-{num[3:5]}-{num[5:]}")
-    else:
+     if "-" not in num:
+         list_item.append(f"{num[:3]}-{num[3:5]}-{num[5:]}")
+     else:
         list_item.append(num)
 list='' 
 for i in list_item:
