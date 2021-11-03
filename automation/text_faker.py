@@ -36,19 +36,22 @@ with open ('automation/email.txt','w+') as f:
 match_phone = re.findall("(\d{3}\D{0,3}\d{3}\D{0,3}\d{4})", potential_txt)
 format_phone1=""
 for i in match_phone:
-    phone = re.search(r'(\d+-?){1,2}$', addr_str)
-    format_phone1 +=f'{i} \n'
-last_num=re.sub(r"[)-.]", "-",format_phone1)
+    # phone = re.search(r'(\d+-?){1,2}$', addr_str)
+    format_phone1 +=f'{i} '
+last_num=re.sub(r"[)-.]", "-",str(format_phone1))
 x_num=re.sub(r"[(]", "",last_num)
-
-
+x_num= x_num.split(" ")
+list_item=[]
 for num in x_num:
-    if len(num) == 10:
-        num=f"{num[:3]} - {num[3:5]} - {num[5:]}"
-    # print(num)
-    x_num += num
-print (x_num)
-# with open ('automation/phone_number.txt','w+') as f:
-#     f.write(phone_format)
+    if len(num) < 11:
+        list_item.append(f"{num[:3]}-{num[3:5]}-{num[5:]}")
+    else:
+        list_item.append(num)
+list='' 
+for i in list_item:
+    list += f'{i}\n'
+print (list)
+with open ('automation/phone_number.txt','w+') as f:
+    f.write(list)
 # # nl='\n'
 # print (phone_format)
